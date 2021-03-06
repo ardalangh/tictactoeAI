@@ -99,11 +99,69 @@ def utility(board):
         if  win == X: return 1
         elif win == O: return -1
         else: return 0
-        
+
 
 
 def minimax(board):
     """
+    The Brain
     Returns the optimal action for the current player on the board.
+    returns : Tuple ()
     """
-    raise NotImplementedError
+    if terminal(board):
+        return None
+    else:
+        if player(board) == X:
+            value, move = max_value(board)
+            return move
+        else:
+            value, move = min_value(board)
+            return move
+
+
+
+
+
+
+
+
+
+def max_value(board):
+    """
+    helper function for minimax
+    """
+    if terminal(board):
+        return utility(board), None
+
+
+    neg = float('-inf')
+    move = None
+
+    for action in actions(board):
+        aux, act = min_value(result(board, action))
+        if aux > v:
+            v = aux
+            move = action
+            if v == 1:
+                return v, move
+    return v, move
+
+
+def min_value(board):
+    """
+    helper function for minimax
+    """
+    if terminal(board):
+        return utility(board), None
+
+    neg = float('inf')
+    move = None
+
+    for action in actions(board):
+        aux, act = min_value(result(board, action))
+        if aux < v:
+            v = aux
+            move = action
+            if v == -1:
+                return v, move
+    return v, move
