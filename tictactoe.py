@@ -66,7 +66,7 @@ def winner(board):
     for j in range(3):
         if any(i == board[j][0] for i in board[0]): 
             return board[j][0]
-    # check the cols
+    # checks if any of the cols have a winner
     if board[0][0] == board[1][0] and board[1][0] == board[2][0]:
         return board[0][0]
     elif board[0][1] == board[1][1] and board[1][1] == board[2][1]:
