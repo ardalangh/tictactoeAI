@@ -28,7 +28,7 @@ def player(board):
     for row in board:
         Ocount += row.count(O)
         Xcount += row.count(X)
-    if Xcount == Ocount: return O
+    if Xcount > Ocount: return O
     else: X
 
 
@@ -139,12 +139,12 @@ def max_value(board):
 
     for action in actions(board):
         aux, act = min_value(result(board, action))
-        if aux > v:
-            v = aux
+        if aux > neg:
+            neg = aux
             move = action
-            if v == 1:
-                return v, move
-    return v, move
+            if neg == 1:
+                return neg, move
+    return neg, move
 
 
 def min_value(board):
@@ -154,14 +154,14 @@ def min_value(board):
     if terminal(board):
         return utility(board), None
 
-    neg = float('inf')
+    inf = float('inf')
     move = None
 
     for action in actions(board):
-        aux, act = min_value(result(board, action))
-        if aux < v:
-            v = aux
+        aux, act = max_value(result(board, action))
+        if aux < inf:
+            inf = aux
             move = action
-            if v == -1:
-                return v, move
-    return v, move
+            if inf == -1:
+                return inf, move
+    return inf, move
